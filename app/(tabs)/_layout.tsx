@@ -2,6 +2,7 @@ import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import { Pressable } from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -26,32 +27,53 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
       }}>
+        <Tabs.Screen
+            name="gallery"
+            options={{
+                title: 'Gallery',
+                tabBarIcon: ({ color }) =>  <Ionicons name="images-outline" size={24} color="black"/>,
+            }}
+        />
+        <Tabs.Screen
+            name="calendar"
+            options={{
+                title: 'Calendar',
+                tabBarIcon: ({ color }) =>  <Ionicons name="calendar-outline" size={24} color="black"/>
+            }}
+        />
+        <Tabs.Screen
+            name="groups"
+            options={{
+                title: 'Groups',
+                tabBarIcon: ({ color }) => <Ionicons name="people-outline" size={24} color="black"/>,
+            }}
+        />
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+            title: 'Chats',
+            tabBarIcon: ({ color }) => <Ionicons name="chatbox-ellipses-outline" size={24} color="black"/>,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="settings"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+            title: 'Settings',
+            tabBarIcon: ({ color }) => <Ionicons name="settings-outline" size={24} color="black"/>,
+            headerRight: () => (
+                <Link href="/modal" asChild>
+                    <Pressable>
+                        {({ pressed }) => (
+                            <FontAwesome
+                                name="info-circle"
+                                size={25}
+                                color={Colors[colorScheme ?? 'light'].text}
+                                style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                            />
+                        )}
+                    </Pressable>
+                </Link>
+            ),
         }}
       />
     </Tabs>
